@@ -13,19 +13,33 @@ function! s:get_libraries_url(version)
 	endif
 
 	let s:cache_libraries_url[a:version] = []
-
-	let boost_url = "http://www.boost.org/doc/libs/"
-	let text = http#get("http://www.boost.org/doc/libs/".a:version."/").content
-	let list = split(text, "\n")
-	for line in list
-		let url  = matchstr(line, '<dt><a href="/doc/libs/\zs.*\ze/">')
-		if !empty(url)
-			let name = matchstr(line, '<dt><a href="/doc/libs/'.url.'/">\zs.*\ze</a>')
-			call add(s:cache_libraries_url[a:version],
-				\ { "name" : name, "url" : boost_url.url."/" })
-		endif
-	endfor
 	
+	if a:version == "trunk"
+		let boost_url = "http://svn.boost.org/svn/boost/trunk/libs/"
+		let text = http#get("http://svn.boost.org/svn/boost/trunk/libs/libraries.htm").content
+		let list = split(matchstr(text, '<ul>\zs.*\ze<\/ul>'), "\n")
+		
+		for line in list
+			let url  = matchstr(line, '<li><a href="\zs[^"]*\ze">')
+			if !empty(url)
+				let name = matchstr(line, '<li><a href="'.url.'">\zs[^"]*\ze</a>')
+				call add(s:cache_libraries_url[a:version],
+						\ { "name" : name, "url" : boost_url.url."/" })
+				endif
+		endfor
+	else
+		let boost_url = "http://www.boost.org/doc/libs/"
+		let text = http#get("http://www.boost.org/doc/libs/".a:version."/").content
+		let list = split(text, "\n")
+		for line in list
+			let url  = matchstr(line, '<dt><a href="/doc/libs/\zs.*\ze/">')
+			if !empty(url)
+				let name = matchstr(line, '<dt><a href="/doc/libs/'.url.'/">\zs.*\ze</a>')
+				call add(s:cache_libraries_url[a:version],
+					\ { "name" : name, "url" : boost_url.url."/" })
+			endif
+		endfor
+	endif
 	return s:cache_libraries_url[a:version]
 endfunction
 
