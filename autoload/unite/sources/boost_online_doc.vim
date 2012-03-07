@@ -24,7 +24,7 @@ function! s:get_libraries_url(version)
 			if !empty(url)
 				let name = matchstr(line, '<li><a href="'.url.'">\zs[^"]*\ze</a>')
 				call add(s:cache_libraries_url[a:version],
-						\ { "name" : name, "url" : boost_url.url."/" })
+						\ { "name" : name, "url" : boost_url.url })
 				endif
 		endfor
 	else
