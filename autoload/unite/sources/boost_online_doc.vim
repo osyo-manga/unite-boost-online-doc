@@ -53,6 +53,14 @@ let s:source = {
 \			"description" : "OpenBrowser",
 \			"is_selectable" : 1,
 \		},
+\		"ref_lynx" : {
+\			"description" : "Ref lynx {url}",
+\			"is_selectable" : 0,
+\		},
+\		"ref_lynx_tabnew" : {
+\			"description" : "tabnew Ref lynx {url}",
+\			"is_selectable" : 0,
+\		},
 \	},
 \}
 
@@ -64,12 +72,36 @@ function! s:source.action_table.openbrowser.func(candidates)
 	endfor
 endfunction
 
+function! s:open_ref_lynx(url)
+	if !exists("g:ref_lynx_cmd")
+		echoerr "Not found ref-lynx"
+		return
+	endif
+
+	if !exists("g:ref_lynx_cmd")
+		echoerr "Not found ref.vim"
+		return
+	endif
+	call ref#open("lynx", a:url)
+endfunction
+
+function! s:source.action_table.ref_lynx.func(candidate)
+	call s:open_ref_lynx(a:candidate.action__url)
+endfunction
+
+function! s:source.action_table.ref_lynx_tabnew.func(candidate)
+	let old = get(g:, "ref_open", "")
+	let g:ref_open="tabnew"
+	call s:open_ref_lynx(a:candidate.action__url)
+	let g:ref_open = old
+endfunction
+
 
 function! s:source.gather_candidates(args, context)
 	let l:version = get(a:args, 0, "release")
 	return map(copy(s:get_libraries_url(l:version)), '{
 \		"word" : v:val.name,
-\		"action__url" : v:val.url
+\		"action__url" : v:val.url,
 \}')
 endfunction
 
