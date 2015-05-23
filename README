@@ -2,6 +2,4 @@ unite.vim に boost-library を出力してオンラインドキュメントを�
 
 下記のプラグインが必要です。
 https://github.com/Shougo/unite.vim
-https://github.com/tyru/open-browser.vim
-https://github.com/mattn/webapi-vim
 
