@@ -1,0 +1,53 @@
+*unite-boost-online-doc*	unite.vim source for boost docs
+
+CONTENTS			*unite-boost-online-doc-contents*
+
+	Introduction		|unite-boost-online-doc-introduction|
+	Installing		|unite-boost-online-doc-installing|
+	Usage			|unite-boost-online-doc-usage|
+
+==============================================================================
+INTRODUCTION			*unite-boost-online-doc-introduction*
+
+	*unite-boost-online-doc* is a source for |unite.vim| that let's you
+	quickly search for Boost libraries using unite.vim's interface, and
+	open it up on the browser.
+
+==============================================================================
+INSTALLING			*unite-boost-online-doc-installing*
+
+	There are several plugins that *unite-boost-online-doc* uses other
+	than |unite.vim|; namely, |open-browser.vim|, |webapi-vim|. If you use
+	|neobundle.vim| for your plugin manager, the configuration will look
+	like the following.
+
+>
+	NeoBundleLazy 'osyo-manga/unite-boost-online-doc', {
+			\ 'autoload': {
+			\   'filetypes': 'cpp',
+			\ },
+			\ 'depends': [
+			\   'mattn/webapi-vim',
+			\   'Shougo/unite.vim',
+			\   'tyru/open-browser.vim',
+			\ ],
+			\ }
+<
+
+	Note that |unite.vim| will automatically know that this plugin is a
+	unite.vim source, so you don't have to specify explicitly.
+
+	Optionally, if you have |ref-lynx| for |ref.vim|, you can choose to
+	open using |ref-lynx|. This allows browsing the docs within Vim.
+
+==============================================================================
+USAGE				*unite-boost-online-doc-usage*
+
+	To show the list of the latest Boost libraries, execute:
+>
+	:Unite boost-online-doc
+<
+	Once you find the library that you want to see the docs of and select
+	it, the browser will open up and take you to that page.
+
+vim:tw=78:ts=8:ft=help:norl:noet:fen:fdl=0:fdm=marker:
