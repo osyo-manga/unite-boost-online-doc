@@ -37,6 +37,9 @@ INSTALLING			*unite-boost-online-doc-installing*
 	Note that |unite.vim| will automatically know that this plugin is a
 	unite.vim source, so you don't have to specify explicitly.
 
+	Optionally, if you have |ref-lynx| for |ref.vim|, you can choose to
+	open using |ref-lynx|. This allows browsing the docs within Vim.
+
 ==============================================================================
 USAGE				*unite-boost-online-doc-usage*
 
