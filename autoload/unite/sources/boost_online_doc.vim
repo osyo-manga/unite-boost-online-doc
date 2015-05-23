@@ -55,7 +55,7 @@ endfunction
 let s:source = {
 \	"name" : "boost-online-doc",
 \	"description" : "boost online document",
-\	"default_action" : "openbrowser",
+\	"default_action" : "start",
 \	"action_table" : {
 \		"openbrowser" : {
 \			"description" : "OpenBrowser",
@@ -110,7 +110,14 @@ function! s:source.gather_candidates(args, context)
 	return map(copy(s:get_libraries_url(l:version)), '{
 \		"word" : v:val.name,
 \		"action__url" : v:val.url,
+\		"kind" : "uri"
 \}')
 endfunction
+
+
+
+if expand("%:p") == expand("<sfile>:p")
+	call unite#define_source(s:source)
+endif
 
 
