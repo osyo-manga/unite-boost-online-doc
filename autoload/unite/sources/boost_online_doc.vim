@@ -4,7 +4,14 @@ function! unite#sources#boost_online_doc#define()
 	return s:source
 endfunction
 
-
+function! s:http_get(...)
+	try
+		return call("webapi#http#get", a:000)
+	catch /E117.*/
+		echo "Please update webapi-vim"
+		return call("http#get", a:000)
+	endtry
+endfunction
 
 let s:cache_libraries_url = {}
 
@@ -17,7 +24,7 @@ function! s:get_libraries_url(version)
 	
 	if a:version == "trunk"
 		let boost_url = "http://svn.boost.org/svn/boost/trunk/libs/"
-		let text = webapi#http#get("http://svn.boost.org/svn/boost/trunk/libs/libraries.htm").content
+		let text = s:http_get("http://svn.boost.org/svn/boost/trunk/libs/libraries.htm").content
 		let list = split(matchstr(text, '<ul>\zs.*\ze<\/ul>'), "\n")
 		
 		for line in list
@@ -30,7 +37,7 @@ function! s:get_libraries_url(version)
 		endfor
 	else
 		let boost_url = "http://www.boost.org/doc/libs/"
-		let text = webapi#http#get("http://www.boost.org/doc/libs/".a:version."/").content
+		let text = s:http_get("http://www.boost.org/doc/libs/".a:version."/").content
 		let list = split(text, "\n")
 		for line in list
 			let url  = matchstr(line, '<dt><a href="/doc/libs/\zs.*\ze/">')
