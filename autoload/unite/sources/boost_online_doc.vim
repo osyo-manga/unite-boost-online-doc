@@ -4,13 +4,11 @@ function! unite#sources#boost_online_doc#define()
 	return s:source
 endfunction
 
+let s:V = vital#of("boost_online_doc")
+let s:HTTP = s:V.import("Web.HTTP")
+
 function! s:http_get(...)
-	try
-		return call("webapi#http#get", a:000)
-	catch /E117.*/
-		echo "Please update webapi-vim"
-		return call("http#get", a:000)
-	endtry
+	return call(s:HTTP.get, a:000, s:HTTP)
 endfunction
 
 let s:cache_libraries_url = {}
@@ -110,6 +108,7 @@ function! s:source.gather_candidates(args, context)
 	return map(copy(s:get_libraries_url(l:version)), '{
 \		"word" : v:val.name,
 \		"action__url" : v:val.url,
+\		"action__path" : v:val.url,
 \		"kind" : "uri"
 \}')
 endfunction
