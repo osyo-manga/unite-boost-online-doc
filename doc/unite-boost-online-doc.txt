@@ -21,7 +21,7 @@ INSTALLING			*unite-boost-online-doc-installing*
 	|neobundle.vim| for your plugin manager, the configuration will look
 	like the following.
 
-	>
+>
 	NeoBundleLazy 'osyo-manga/unite-boost-online-doc', {
 			\ 'autoload': {
 			\   'filetypes': 'cpp',
@@ -32,7 +32,7 @@ INSTALLING			*unite-boost-online-doc-installing*
 			\   'tyru/open-browser.vim',
 			\ ],
 			\ }
-	<
+<
 
 	Note that |unite.vim| will automatically know that this plugin is a
 	unite.vim source, so you don't have to specify explicitly.
