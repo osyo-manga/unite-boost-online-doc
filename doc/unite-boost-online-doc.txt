@@ -9,14 +9,14 @@ CONTENTS			*unite-boost-online-doc-contents*
 ==============================================================================
 INTRODUCTION			*unite-boost-online-doc-introduction*
 
-	*unite-boost-online-doc* is a source for |unite.vim| that let's you
+	|unite-boost-online-doc| is a source for |unite.vim| that let's you
 	quickly search for Boost libraries using unite.vim's interface, and
 	open it up on the browser.
 
 ==============================================================================
 INSTALLING			*unite-boost-online-doc-installing*
 
-	There are several plugins that *unite-boost-online-doc* uses other
+	There are several plugins that |unite-boost-online-doc| uses other
 	than |unite.vim|; namely, |open-browser.vim|, |webapi-vim|. If you use
 	|neobundle.vim| for your plugin manager, the configuration will look
 	like the following.
